@@ -2,6 +2,8 @@
 {
     static void Main(string[] args)
     {
-        Day2.Execute();
+        // Day1.Execute();
+        // Day2.Execute();
+        Day3.Execute();
     }
 }
