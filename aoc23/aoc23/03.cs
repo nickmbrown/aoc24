@@ -23,11 +23,10 @@ public class Day3
         Dictionary<Coord, string> numbers = GetNumbers(lines);
         Dictionary<Coord, int> possibleGears = new Dictionary<Coord, int>();
         List<int> gearRatios = new List<int>();
-        List<int> validNumebrs = new List<int>();
+        List<int> validNumbers = new List<int>();
 
         foreach (var item in numbers)
         {
-            // Console.WriteLine(item.Value + " - " + item.Key.ToString() + " - " + item.Value.Length);
             bool hasAdjacentSymbol = false;
 
             for (int y = item.Key.Y - 1; y <= item.Key.Y + 1; y++)
@@ -63,24 +62,12 @@ public class Day3
 
             if(hasAdjacentSymbol)
             {
-                validNumebrs.Add(int.Parse(item.Value));
+                validNumbers.Add(int.Parse(item.Value));
             }
         }
 
-        int sum = 0;
-        foreach (var item in validNumebrs)
-        {
-            sum += item;
-        }
-
-        Console.WriteLine("Sum: " + sum);
-
-        int gearRatiosSum = 0;
-        foreach (var item in gearRatios)
-        {
-            gearRatiosSum += item;
-        }
-        Console.WriteLine("Gear Ratio Sum: " + gearRatiosSum);
+        Console.WriteLine("Sum: " + validNumbers.Sum());
+        Console.WriteLine("Gear Ratio Sum: " + gearRatios.Sum());
     }
 
     private static Dictionary<Coord, string> GetNumbers(string[] lines)
