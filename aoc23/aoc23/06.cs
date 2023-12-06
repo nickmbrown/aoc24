@@ -35,14 +35,18 @@ public class Day6
 
         for (int i = 0; i < times.Count; i++)
         {
-            Console.WriteLine($"Time: {times[i]} Distance: {distances[i]}");
+            // Console.WriteLine($"Time: {times[i]} Distance: {distances[i]}");
             numWaysToWin[i] = GetNumWaysToWin(times[i], distances[i]);
         }
 
         // Correct Answer = 4403592
         Console.WriteLine("Part 1: " + numWaysToWin.Aggregate(1, (a, b) => a * b));
         
+        // Correct Answer = 38017587
         Console.WriteLine("Part 2: " + GetNumWaysToWin(bigTime, bigDistance));
+
+        // Brute Force method is ~100ms
+        // Doing it right is ~7ms
 
         sw.Stop();
         Console.WriteLine(sw.ElapsedMilliseconds);
@@ -50,15 +54,23 @@ public class Day6
 
     private static int GetNumWaysToWin(long time, long distance)
     {
-        int holdTime = 0;
+        double sqrt = Math.Sqrt(time * time - 4 * (-1) * -distance);
+        double x1 = (-time + sqrt) / -2;
+        double x2 = (-time - sqrt) / -2;
+
+        return (int)(Math.Ceiling(x2) - Math.Floor(x1)) - 1;
+    }
+
+    private static int GetNumWaysToWinBruteForce(long time, long distance)
+    {
+        int holdTime = 1;
         int waysToWin = 0;
+        long travelTime, distanceTraveled;
 
         while (holdTime <= time)
         {
-            long travelTime = time - holdTime;
-            int speed = holdTime;
-
-            long distanceTraveled = travelTime * speed;
+            travelTime = time - holdTime;
+            distanceTraveled = travelTime * holdTime;
 
             if (distanceTraveled > distance)
             {
