@@ -6,6 +6,7 @@
         // Day2.Execute();
         // Day3.Execute();
         // Day4.Execute();
-        Day5.Execute2();
+        // Day5.Execute2();
+        Day6.Execute();
     }
 }
