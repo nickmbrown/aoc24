@@ -127,4 +127,27 @@ public static class Utils
             }
         }
     }
+
+    public static void Print2DArray(char[,] array)
+    {
+        for (int y = 0; y < array.GetLength(0); y++)
+        {
+            for (int x = 0; x < array.GetLength(1); x++)
+            {
+                Console.Write(array[y,x]);
+            }
+            Console.WriteLine();
+        }
+    }
+    public static void Print2DList(List<List<char>> array)
+    {
+        for (int y = 0; y < array.Count; y++)
+        {
+            for (int x = 0; x < array[y].Count; x++)
+            {
+                Console.Write(array[y][x]);
+            }
+            Console.WriteLine();
+        }
+    }
 }

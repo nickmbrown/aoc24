@@ -76,28 +76,23 @@ public class Day10
         Console.WriteLine("Length: " + (length+1)/2);
 
         int containedTiles = 0;
-        bool isInside = false;
+        
         for (int y = 0; y < clearLoop.GetLength(0); y++)
         {
+            int timesCrossed = 0;
             for (int x = 0; x < clearLoop.GetLength(1); x++)
             {
-                char printValue = clearLoop[y,x] ? '1' : '0';
-                //Console.Write(clearLoop[y,x] ? '1' : '0');
+                int lastValue = GetLastValueOnRow(clearLoop, y);
+                // char printValue = clearLoop[y,x] ? '1' : '0';
+                char printValue = grid[y,x];
+                if(clearLoop[y,x]) 
+                {
+                    timesCrossed++;
+                }
 
-                bool from0to1 = x > 0 && clearLoop[y,x] && !clearLoop[y,x-1];
-                bool from1to0 = x > 0 && !clearLoop[y,x] && clearLoop[y,x-1];
-            
-                if(from0to1) 
+                if(timesCrossed % 2 != 0 && !clearLoop[y,x] && !OnEdge(clearLoop, x, y) && x < lastValue) 
                 {
-                    isInside = true;
-                }
-                if(from1to0 && isInside)
-                {
-                    isInside = false;
-                }
-                if(isInside && !clearLoop[y,x]) 
-                {
-                    // printValue = '*';
+                    printValue = '*';
                     containedTiles++;
                 }
 
@@ -106,10 +101,30 @@ public class Day10
             Console.WriteLine();
         }
 
+        // Incorrect Answers
+        // 1142 - too high
         Console.WriteLine($"Contained Tiles: {containedTiles}");
 
         sw.Stop();
         Console.WriteLine(sw.ElapsedMilliseconds);
+    }
+
+    private static int GetLastValueOnRow(bool[,] array, int y)
+    {
+        bool[] row = Enumerable.Range(0, array.GetLength(1))
+                        .Select(x => array[y, x])
+                        .ToArray();
+
+        for (int i = row.Length-1; i >= 0; i--)
+        {
+            if(row[i]) return i+1;
+        }
+        return 0;
+    }
+
+    private static bool OnEdge(bool[,] array, int x, int y)
+    {
+        return x == array.GetLength(1)-1 || x == 0 || y == array.GetLength(0)-1 || y == 0;
     }
 
     private static Pipe[] GetConnectedPipes(char[,] grid, Pipe pipe)
