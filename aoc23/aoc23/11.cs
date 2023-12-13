@@ -68,7 +68,7 @@ public class Day11
         {
             double xDistance = Math.Abs(pair.A.X - pair.B.X);
             double yDistance = Math.Abs(pair.A.Y - pair.B.Y);
-            
+
             foreach (var emptyColumn in emptyColumns)
             {
                 if(emptyColumn <= pair.A.X && pair.B.X <= emptyColumn || emptyColumn <= pair.B.X && pair.A.X <= emptyColumn)
