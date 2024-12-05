@@ -1,3 +1,3 @@
-# Advent of Code 2023
+# Advent of Code 2024
 
-I'm not about learning anything new this year so we're sticking to the tried and true C#.
+C# again
