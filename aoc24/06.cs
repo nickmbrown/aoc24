@@ -14,7 +14,7 @@ public class Day6
             return $"{X}, {Y}";
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Coord other)
             {
@@ -33,7 +33,7 @@ public class Day6
     {
         public Coord Coord { get; set; } = coord;
         public Direction Direction { get; set; } = direction;
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Vector2 other)
             {
